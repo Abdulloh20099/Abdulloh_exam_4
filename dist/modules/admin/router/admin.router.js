@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.adminRouter = void 0;
+const express_1 = require("express");
+const admin_crud_js_1 = require("../controller/admin.crud.js");
+const multer_conf_js_1 = require("../../utils/multer.conf.js");
+const category_middleware_js_1 = require("../../category/middleware/category.middleware.js");
+exports.adminRouter = (0, express_1.Router)();
+exports.adminRouter.get('/admin', category_middleware_js_1.admincheck.adminMiddleware, admin_crud_js_1.adminCrud.getUsers);
+exports.adminRouter.get('/admin/:id', category_middleware_js_1.admincheck.adminMiddleware, admin_crud_js_1.adminCrud.getUsersOne);
+exports.adminRouter.post('/admin', multer_conf_js_1.upload.single('uploads'), category_middleware_js_1.admincheck.adminMiddleware, admin_crud_js_1.adminCrud.createUser);
+exports.adminRouter.put('/admin/:id', multer_conf_js_1.upload.single('uploads'), category_middleware_js_1.admincheck.adminMiddleware, admin_crud_js_1.adminCrud.updateUsers);
+exports.adminRouter.delete('/admin/:id', category_middleware_js_1.admincheck.adminMiddleware, admin_crud_js_1.adminCrud.deleteUsers);

@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authRouter = void 0;
+const express_1 = require("express");
+const user_controller_js_1 = require("../controller/user.controller.js");
+const user_middlewate_js_1 = require("../middleware/user.middlewate.js");
+const multer_conf_js_1 = require("../../utils/multer.conf.js");
+exports.authRouter = (0, express_1.Router)();
+exports.authRouter.get('/users', user_controller_js_1.AuthController.get);
+exports.authRouter.post('/register', multer_conf_js_1.upload.single('profileImg'), user_middlewate_js_1.userMiddlewareInstance.userMiddleware, user_controller_js_1.AuthController.SignUp);
+exports.authRouter.put('/login', user_controller_js_1.AuthController.SignIn);
